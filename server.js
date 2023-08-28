@@ -30,12 +30,13 @@ app.post("/add", (req, res) => {
     res.send    (listOfTasks);
 });
 
-app.delete("/delete/:indice", (req, res) => {
+app.delete("/delete", (req, res) => {
     let i = 0;
     const new_tasks = [];
+    const dataJson = req.body
     
     while (i < tasks.length) {
-        if (i !== parseInt(req.params.indice)) {
+        if (i !== parseInt(dataJson["id"])) {
             new_tasks.push(tasks[i]);
         }
         i++;
@@ -44,15 +45,16 @@ app.delete("/delete/:indice", (req, res) => {
     tasks = new_tasks;
     var listOfTasks = toJson(tasks);
 
-    res.send(listOfTasks);
+    res.send("Task has benn deleted");
 });
 
-app.put("/update/:indice/:new_task", (req, res) => {
+app.put("/update", (req, res) => {
     let i = 0;
+    const dataJson = req.body
 
     while (i < tasks.length) {
-        if (i == parseInt(req.params.indice)) {
-            tasks[i] = req.params.new_task;
+        if (i == parseInt(dataJson["id"])) {
+            tasks[i] = dataJson["title"];
         }
         i++;
     }
