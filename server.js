@@ -8,13 +8,13 @@ app.get("/", (req, res) => {
     res.send    (tasks);
 });
 
-app.get("/add/:task", (req, res) => {
+app.post("/add/:task", (req, res) => {
     new_task = [tasks.push(req.params.task)];
     tasks.concat(new_task);
-    res.send    ("task added");
+    res.send    (tasks);
 });
 
-app.get("/delete/:indice", (req, res) => {
+app.delete("/delete/:indice", (req, res) => {
     let i = 0;
     const new_tasks = [];
     
@@ -30,7 +30,7 @@ app.get("/delete/:indice", (req, res) => {
     res.send(tasks);
 });
 
-app.get("/update/:indice/:new_task", (req, res) => {
+app.put("/update/:indice/:new_task", (req, res) => {
     let i = 0;
 
     while (i < tasks.length) {
